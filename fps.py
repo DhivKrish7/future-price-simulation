@@ -10,21 +10,15 @@ def simulate_stock_price(days, simulations):
     for _ in range(days):
         price = stock_price()
         prices.append(price)
-    
     prices = np.array(prices)
-
-    returns = np.diff(prices) / prices[:-1]
-    mean = np.mean(returns)
-    sigma = np.std(returns)
-
-    print(f'Mean of returns: {mean}')
-    print(f'St.dev of returns: {sigma}')
+    
+    mean_prices = np.mean(prices)
+    print(f'Mean of prices: {mean_prices}')
 
     log_returns = np.diff(np.log(prices))
     log_mean = np.mean(log_returns)
     log_sigma = np.std(log_returns)
     dt = 1/252
-
     future_paths = []
     future_days = 252
     last_price = prices[-1] 
@@ -35,11 +29,9 @@ def simulate_stock_price(days, simulations):
             Z = np.random.normal()
             next_price = path[-1] * np.exp((log_mean-0.5 * log_sigma**2)*dt + log_sigma*np.sqrt(dt)*Z)
             path.append(next_price)
-
         future_paths.append(path)
 
     end_price = [path[-1] for path in future_paths]
-
     plt.figure(figsize=(20,6))
 
     plt.subplot(1,2,1)
