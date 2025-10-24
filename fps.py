@@ -17,8 +17,8 @@ def simulate_stock_price(days, simulations):
     mean = np.mean(returns)
     sigma = np.std(returns)
 
-    print(f'Mean of generated prices: {mean}')
-    print(f'Std of generated prices: {sigma}')
+    print(f'Mean of returns: {mean}')
+    print(f'St.dev of returns: {sigma}')
 
     log_returns = np.diff(np.log(prices))
     log_mean = np.mean(log_returns)
